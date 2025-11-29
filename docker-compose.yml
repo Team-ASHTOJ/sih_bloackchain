@@ -1,0 +1,56 @@
+services:
+  node1:
+    build: .
+    container_name: node1
+    environment:
+      NODE_URL: "http://node1:5000"
+      NODES: "http://node1:5000,http://node2:5000,http://node3:5000,http://node4:5000"
+      BLOCK_ENCRYPTION_KEY: "LULSnIHlBjTSfWDfqVl0kTV9qXUFN0EpGbynAB_34TM="
+    volumes:
+      - ./data/node1:/app/db
+    ports:
+      - "5001:5000"
+    networks: [chain]
+
+  node2:
+    build: .
+    container_name: node2
+    environment:
+      NODE_URL: "http://node2:5000"
+      NODES: "http://node1:5000,http://node2:5000,http://node3:5000,http://node4:5000"
+      BLOCK_ENCRYPTION_KEY: "LULSnIHlBjTSfWDfqVl0kTV9qXUFN0EpGbynAB_34TM="
+    volumes:
+      - ./data/node2:/app/db
+    ports:
+      - "5002:5000"
+    networks: [chain]
+
+  node3:
+    build: .
+    container_name: node3
+    environment:
+      NODE_URL: "http://node3:5000"
+      NODES: "http://node1:5000,http://node2:5000,http://node3:5000,http://node4:5000"
+      BLOCK_ENCRYPTION_KEY: "LULSnIHlBjTSfWDfqVl0kTV9qXUFN0EpGbynAB_34TM="
+    volumes:
+      - ./data/node3:/app/db
+    ports:
+      - "5003:5000"
+    networks: [chain]
+
+  node4:
+    build: .
+    container_name: node4
+    environment:
+      NODE_URL: "http://node4:5000"
+      NODES: "http://node1:5000,http://node2:5000,http://node3:5000,http://node4:5000"
+      BLOCK_ENCRYPTION_KEY: "LULSnIHlBjTSfWDfqVl0kTV9qXUFN0EpGbynAB_34TM="
+    volumes:
+      - ./data/node4:/app/db
+    ports:
+      - "5004:5000"
+    networks: [chain]
+
+networks:
+  chain:
+    driver: bridge
